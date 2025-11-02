@@ -1,3 +1,5 @@
+const backendURL = 'https://eight32301313-concacts-backend-6.onrender.com';
+
 let userId = localStorage.getItem('user_id');
 if (!userId) {
   alert('Please login first');
@@ -5,7 +7,7 @@ if (!userId) {
 }
 
 function loadContacts() {
-  fetch(`http://127.0.0.1:5000/api/contacts/${userId}`)
+  fetch(`${backendURL}/api/contacts/${userId}`)
     .then(res => res.json())
     .then(data => renderContacts(data));
 }
@@ -31,7 +33,7 @@ function addContact() {
   const name = document.getElementById('name').value;
   const phone = document.getElementById('phone').value;
   if (!name || !phone) return alert('Please fill all fields');
-  fetch('http://127.0.0.1:5000/api/contacts', {
+  fetch(`${backendURL}/api/contacts`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({name, phone, user_id: userId})
@@ -41,7 +43,7 @@ function addContact() {
 function editContact(id, name, phone) {
   const newName = prompt("Edit name:", name);
   const newPhone = prompt("Edit phone:", phone);
-  fetch(`http://127.0.0.1:5000/api/contacts/${id}`, {
+  fetch(`${backendURL}/api/contacts/${id}`, {
     method: 'PUT',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({name: newName, phone: newPhone})
@@ -50,11 +52,10 @@ function editContact(id, name, phone) {
 
 function deleteContact(id) {
   if (confirm("Delete this contact?")) {
-    fetch(`http://127.0.0.1:5000/api/contacts/${id}`, {method: 'DELETE'})
+    fetch(`${backendURL}/api/contacts/${id}`, {method: 'DELETE'})
       .then(() => loadContacts());
   }
 }
-
 
 function filterContacts() {
   const search = document.getElementById('search').value.toLowerCase();
@@ -73,7 +74,7 @@ function logout() {
 document.addEventListener('DOMContentLoaded', loadContacts);
 
 function exportCSV() {
-    fetch(`http://127.0.0.1:5000/api/export/${userId}`)
+    fetch(`${backendURL}/api/export/${userId}`)
         .then(response => response.blob())
         .then(blob => {
             const url = window.URL.createObjectURL(blob);
@@ -84,4 +85,3 @@ function exportCSV() {
             window.URL.revokeObjectURL(url);
         });
 }
-
