@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Contacts</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>📒 My Contacts</h2>
+
+    <input id="search" placeholder="Search contacts..." oninput="filterContacts()" />
+
+    <div class="form">
+      <input id="name" placeholder="Name" />
+      <input id="phone" placeholder="Phone" />
+      <button onclick="addContact()">Add</button>
+    </div>
+
+    <table id="contactsTable">
+      <thead>
+        <tr><th>Name</th><th>Phone</th><th>Actions</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <button onclick="exportCSV()">📤 Export CSV</button>
+    <button onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
