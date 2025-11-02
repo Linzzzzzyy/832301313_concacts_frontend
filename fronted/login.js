@@ -1,5 +1,7 @@
+const backendURL = 'https://eight32301313-concacts-backend-6.onrender.com';
+
 function login() {
-  fetch('http://127.0.0.1:5000/api/login', {
+  fetch(`${backendURL}/api/login`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
@@ -19,7 +21,7 @@ function login() {
 }
 
 function register() {
-  fetch('http://127.0.0.1:5000/api/register', {
+  fetch(`${backendURL}/api/register`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
@@ -32,3 +34,4 @@ function register() {
     alert(data.success ? "Register success! Please login." : data.message);
   });
 }
+
